@@ -1,0 +1,34 @@
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+
+	<title>Entity of an Open For Business Project Component</title>
+	<description>None</description>
+	<version>1.0</version>
+
+	<entity package-name="org.zf.entity" entity-name="Party" title="Party Entity"
+		no-auto-stamp="true">
+		<field name="partyId" type="id-ne"></field>
+		<field name="partyName" type="name"></field>
+		<prim-key field="partyId" />
+	</entity>
+
+	<entity package-name="org.zf.entity" entity-name="User" title="User Entity"
+		no-auto-stamp="true">
+		<field name="userId" type="id-ne"></field>
+		<field name="partyId" type="id-ne"></field>
+		<field name="loginName" type="name"></field>
+		<prim-key field="userId" />
+	</entity>
+
+	<view-entity package-name="org.zf.entity.view" entity-name="PartyAndUser"
+		title="Party and User Entity">
+		<member-entity entity-alias="PARTY" entity-name="Party" />
+		<member-entity entity-alias="USER" entity-name="User" />
+		<alias-all entity-alias="PARTY" />
+		<alias-all entity-alias="USER" />
+		<view-link entity-alias="PARTY" rel-entity-alias="USER">
+			<key-map field-name="partyId" rel-field-name="partyId" />
+		</view-link>
+	</view-entity>
+
+</entitymodel>  

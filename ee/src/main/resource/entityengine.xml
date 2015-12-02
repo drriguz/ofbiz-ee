@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entity-config.xsd">
+
+	<resource-loader name="fieldTypeLoader"
+		class="org.ofbiz.base.config.ClasspathLoader" prefix="fieldtype/" />
+
+	<resource-loader name="entityLoader"
+		class="org.ofbiz.base.config.ClasspathLoader" prefix="entity/" />
+
+	<transaction-factory class="org.ofbiz.geronimo.GeronimoTransactionFactory" />
+
+	<connection-factory class="org.ofbiz.entity.connection.DBCPConnectionFactory" />
+
+	<debug-xa-resources value="false" />
+
+	<delegator name="default" entity-model-reader="main"
+		entity-group-reader="main" entity-eca-reader="main">
+		<group-map group-name="org.ofbiz" datasource-name="localmysql" />
+		<group-map group-name="org.ofbiz.olap" datasource-name="localmysqlolap" />
+		<group-map group-name="org.ofbiz.tenant" datasource-name="localmysqltenant" />
+	</delegator>
+
+	<!-- 实体配置 -->
+	<entity-model-reader name="main">
+		<resource loader="entityLoader" location="entitymodel.xml" />
+	</entity-model-reader>
+
+	<entity-group-reader name="main" />
+
+	<entity-eca-reader name="main" />
+
+	<entity-data-reader name="tenant" />
+	<entity-data-reader name="seed" />
+	<entity-data-reader name="seed-initial" />
+	<entity-data-reader name="demo" />
+	<entity-data-reader name="ext" />
+	<entity-data-reader name="ext-test" />
+	<entity-data-reader name="ext-demo" />
+
+	<!-- 数据类型配置，可以拷贝OFBIZ_HOME/framework/entity/fieldtype/fieldtypemysql.xml文件到项目 -->
+	<field-type name="mysql" loader="fieldTypeLoader" location="fieldtypemysql.xml" />
+
+	<!-- 数据源配置 -->
+	<datasource name="localmysql"
+		helper-class="org.ofbiz.entity.datasource.GenericHelperDAO"
+		field-type-name="mysql" check-on-start="true" add-missing-on-start="true"
+		check-pks-on-start="false" use-foreign-keys="true" join-style="ansi-no-parenthesis"
+		alias-view-columns="false" drop-fk-use-foreign-key-keyword="true"
+		character-set="utf8" collate="utf8_general_ci">
+		<read-data reader-name="tenant" />
+		<read-data reader-name="seed" />
+		<read-data reader-name="seed-initial" />
+		<read-data reader-name="demo" />
+		<read-data reader-name="ext" />
+		<read-data reader-name="ext-test" />
+		<read-data reader-name="ext-demo" />
+		<inline-jdbc jdbc-driver="org.mariadb.jdbc.Driver"
+			jdbc-uri="jdbc:mysql://localhost:3306/ofbiz" jdbc-username="root"
+			jdbc-password="1125482715" isolation-level="ReadCommitted" pool-minsize="2"
+			pool-maxsize="250" time-between-eviction-runs-millis="600000" />
+	</datasource>
+	<datasource name="localmysqlolap"
+		helper-class="org.ofbiz.entity.datasource.GenericHelperDAO"
+		field-type-name="mysql" check-on-start="true" add-missing-on-start="true"
+		check-pks-on-start="false" use-foreign-keys="true" join-style="ansi-no-parenthesis"
+		alias-view-columns="false" drop-fk-use-foreign-key-keyword="true"
+		character-set="utf8" collate="utf8_general_ci">
+		<read-data reader-name="tenant" />
+		<read-data reader-name="seed" />
+		<read-data reader-name="seed-initial" />
+		<read-data reader-name="demo" />
+		<read-data reader-name="ext" />
+		<read-data reader-name="ext-test" />
+		<read-data reader-name="ext-demo" />
+		<inline-jdbc jdbc-driver="org.mariadb.jdbc.Driver"
+			jdbc-uri="jdbc:mysql://localhost:3306/olap" jdbc-username="root"
+			jdbc-password="1125482715" isolation-level="ReadCommitted" pool-minsize="2"
+			pool-maxsize="250" time-between-eviction-runs-millis="600000" />
+	</datasource>
+	<datasource name="localmysqltenant"
+		helper-class="org.ofbiz.entity.datasource.GenericHelperDAO"
+		field-type-name="mysql" check-on-start="true" add-missing-on-start="true"
+		check-pks-on-start="false" use-foreign-keys="true" join-style="ansi-no-parenthesis"
+		alias-view-columns="false" drop-fk-use-foreign-key-keyword="true"
+		character-set="utf8" collate="utf8_general_ci">
+		<read-data reader-name="tenant" />
+		<read-data reader-name="seed" />
+		<read-data reader-name="seed-initial" />
+		<read-data reader-name="demo" />
+		<read-data reader-name="ext" />
+		<read-data reader-name="ext-test" />
+		<read-data reader-name="ext-demo" />
+		<inline-jdbc jdbc-driver="org.mariadb.jdbc.Driver"
+			jdbc-uri="jdbc:mysql://localhost:3306/tenant" jdbc-username="root"
+			jdbc-password="1125482715" isolation-level="ReadCommitted" pool-minsize="2"
+			pool-maxsize="250" time-between-eviction-runs-millis="600000" />
+	</datasource>
+</entity-config>
