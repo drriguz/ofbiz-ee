@@ -27,6 +27,9 @@ public class App {
         List<GenericValue> valueList = null;
 
         try {
+            valueList = delegator.findList("PartyAndUser", EntityCondition.makeCondition("partyName", "TEST"), null, null, null, true);
+            System.out.println(valueList.size());
+
             String groupHelperName = delegator.getGroupHelperName("org.ofbiz");
             Connection conn = ConnectionFactory.getConnection(groupHelperName);
             Statement stmt = conn.createStatement();
@@ -35,12 +38,9 @@ public class App {
             while (rs.next()) {
                 System.out.println("->" + rs.getString(1));
             }
-            valueList = delegator.findList("User",
-                    EntityCondition.makeCondition("userId", "00000001"), null, null,
-                    null, true);
+            valueList = delegator.findList("User", EntityCondition.makeCondition("userId", "00000001"), null, null, null, true);
             System.out.println(valueList.size());
-        }
-        catch (GenericEntityException | SQLException e) {
+        } catch (GenericEntityException | SQLException e) {
             e.printStackTrace();
         }
 

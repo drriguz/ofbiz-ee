@@ -56,8 +56,8 @@
 		<read-data reader-name="ext-test" />
 		<read-data reader-name="ext-demo" />
 		<inline-jdbc jdbc-driver="org.mariadb.jdbc.Driver"
-			jdbc-uri="jdbc:mysql://localhost:3306/ofbiz" jdbc-username="root"
-			jdbc-password="1125482715" isolation-level="ReadCommitted" pool-minsize="2"
+			jdbc-uri="jdbc:mysql://localhost:3306/ee" jdbc-username="root"
+			jdbc-password="sa" isolation-level="ReadCommitted" pool-minsize="2"
 			pool-maxsize="250" time-between-eviction-runs-millis="600000" />
 	</datasource>
 	<datasource name="localmysqlolap"
@@ -74,7 +74,7 @@
 		<read-data reader-name="ext-test" />
 		<read-data reader-name="ext-demo" />
 		<inline-jdbc jdbc-driver="org.mariadb.jdbc.Driver"
-			jdbc-uri="jdbc:mysql://localhost:3306/olap" jdbc-username="root"
+			jdbc-uri="jdbc:mysql://localhost:3306/eeolap" jdbc-username="root"
 			jdbc-password="1125482715" isolation-level="ReadCommitted" pool-minsize="2"
 			pool-maxsize="250" time-between-eviction-runs-millis="600000" />
 	</datasource>
@@ -92,7 +92,7 @@
 		<read-data reader-name="ext-test" />
 		<read-data reader-name="ext-demo" />
 		<inline-jdbc jdbc-driver="org.mariadb.jdbc.Driver"
-			jdbc-uri="jdbc:mysql://localhost:3306/tenant" jdbc-username="root"
+			jdbc-uri="jdbc:mysql://localhost:3306/eetenant" jdbc-username="root"
 			jdbc-password="1125482715" isolation-level="ReadCommitted" pool-minsize="2"
 			pool-maxsize="250" time-between-eviction-runs-millis="600000" />
 	</datasource>
